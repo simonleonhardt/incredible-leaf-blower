@@ -1,0 +1,23 @@
+* {
+    font-size: 0;
+    margin: 0;
+}
+
+canvas {
+    width: 100vw;
+    height: 100vh;
+    background-color: linen;
+}
+
+#playbutton {
+    color: rgb(43, 40, 38);
+    background-color:rgb(228, 212, 228);
+    border: none;
+    border-radius: 5%;
+    font-size: 40px;
+    width: 40%;
+    height: 200px;
+    position: absolute;
+    left: 30%;
+    top: 300px;
+}
