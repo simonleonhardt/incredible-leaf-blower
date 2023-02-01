@@ -35,43 +35,43 @@ let purchases = {
 };
 
 const titleImage = new Image();
-titleImage.src = "/images/titleImg.png";
+titleImage.src = "images/titleImg.png";
 
 const shopImage = new Image();
-shopImage.src = "/images/shopIcon.png";
+shopImage.src = "images/shopIcon.png";
 
 const backgroundImage = new Image();
-backgroundImage.src = "/images/background.png";
+backgroundImage.src = "images/background.png";
 
 const playerImage = new Image();
-playerImage.src = "/images/player.png";
+playerImage.src = "images/player.png";
 
 const leafImage1 = new Image();
-leafImage1.src = "/images/leaf1.png";
+leafImage1.src = "images/leaf1.png";
 
 const leafImage2 = new Image();
-leafImage2.src = "/images/leaf2.png";
+leafImage2.src = "images/leaf2.png";
 
 const leafImage3 = new Image();
-leafImage3.src = "/images/leaf3.png";
+leafImage3.src = "images/leaf3.png";
 
 const leafImage4 = new Image();
-leafImage4.src = "/images/leaf4.png";
+leafImage4.src = "images/leaf4.png";
 
 const leafImage5 = new Image();
-leafImage5.src = "/images/leaf5.png";
+leafImage5.src = "images/leaf5.png";
 
 const leafImage6 = new Image();
-leafImage6.src = "/images/leaf6.png";
+leafImage6.src = "images/leaf6.png";
 
 const treeAttackingRightImage = new Image();
-treeAttackingRightImage.src = "/images/treeAttackingRight.png";
+treeAttackingRightImage.src = "images/treeAttackingRight.png";
 
 const treeAttackingLeftImage = new Image();
-treeAttackingLeftImage.src = "/images/treeAttackingLeft.png";
+treeAttackingLeftImage.src = "images/treeAttackingLeft.png";
 
 const treeDeadImage = new Image();
-treeDeadImage.src = "/images/treeDead.png";
+treeDeadImage.src = "images/treeDead.png";
 
 document.addEventListener("mousemove", (event) => {
   mouseX = event.clientX;
