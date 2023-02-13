@@ -107,78 +107,40 @@ document.addEventListener("click", () => {
     ) {
       shopOpen = false;
     }
-    if (
-      mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-      mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-      mouseY >= canvas.height / 8 + 35 &&
-      mouseY <= canvas.height / 8 + 115
-    ) {
-      if (coins >= purchases.blowRadiusLevel * 10) {
-        coins -= purchases.blowRadiusLevel * 10;
-        purchases.blowRadiusLevel++;
-        purchases.blowRadius += 15;
-      }
-    }
-    if (
-      mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-      mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-      mouseY >= canvas.height / 8 + 170 &&
-      mouseY <= canvas.height / 8 + 250 &&
-      purchases.blowPowerDivider > 1
-    ) {
-      if (coins >= purchases.blowPowerDividerLevel * 40) {
-        coins -= purchases.blowPowerDividerLevel * 40;
-        purchases.blowPowerDividerLevel++;
-        purchases.blowPowerDivider--;
-      }
-    }
-    if (
-      mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-      mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-      mouseY >= canvas.height / 8 + 305 &&
-      mouseY <= canvas.height / 8 + 385 &&
-      purchases.spawnTime > 50
-    ) {
-      if (coins >= purchases.spawnTimeLevel * 30) {
-        coins -= purchases.spawnTimeLevel * 30;
-        purchases.spawnTimeLevel++;
-        purchases.spawnTime -= 10;
-      }
-    }
-    if (
-      mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-      mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-      mouseY >= canvas.height / 8 + 440 &&
-      mouseY <= canvas.height / 8 + 520
-    ) {
-      if (coins >= purchases.spawnAmountLevel * 10) {
-        coins -= purchases.spawnAmountLevel * 10;
-        purchases.spawnAmountLevel++;
-        purchases.spawnAmount += 2;
-      }
-    }
-    if (
-      mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-      mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-      mouseY >= canvas.height / 8 + 575 &&
-      mouseY <= canvas.height / 8 + 655
-    ) {
-      if (coins >= purchases.maxLeavesLevel * 10) {
-        coins -= purchases.maxLeavesLevel * 10;
-        purchases.maxLeavesLevel++;
-        purchases.maxLeaves += 5;
-      }
-    }
-    if (
-      mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-      mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-      mouseY >= canvas.height / 8 + 710 &&
-      mouseY <= canvas.height / 8 + 790
-    ) {
-      if (coins >= purchases.leafSellPriceLevel * 50) {
-        coins -= purchases.leafSellPriceLevel * 50;
-        purchases.leafSellPriceLevel++;
-        purchases.leafSellPrice += 1;
+
+    for (i = 0; i < 7; i++) {
+      if (
+        mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
+        mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
+        mouseY >= canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * i + (canvas.height * (3 / 4) + 30)/26 + 15 &&
+        mouseY <= (canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * i + (canvas.height * (3 / 4) + 30)/26 + 15) + (((canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26) - 30) &&
+        shopOpen
+      ) {
+        if(i == 0 && coins >= purchases.blowRadiusLevel * 10) {
+          coins -= purchases.blowRadiusLevel * 10;
+          purchases.blowRadiusLevel++;
+          purchases.blowRadius += 15;
+        } else if(i == 1 && purchases.blowPowerDivider > 1 && coins >= purchases.blowPowerDividerLevel * 40) {
+          coins -= purchases.blowPowerDividerLevel * 40;
+          purchases.blowPowerDividerLevel++;
+          purchases.blowPowerDivider--;
+        } else if(i == 2 && purchases.spawnTime > 50 && coins >= purchases.spawnTimeLevel * 30) {
+          coins -= purchases.spawnTimeLevel * 30;
+          purchases.spawnTimeLevel++;
+          purchases.spawnTime -= 10;
+        } else if(i == 3 && coins >= purchases.spawnAmountLevel * 10) {
+          coins -= purchases.spawnAmountLevel * 10;
+          purchases.spawnAmountLevel++;
+          purchases.spawnAmount += 2;
+        } else if(i == 4 && coins >= purchases.maxLeavesLevel * 10) {
+          coins -= purchases.maxLeavesLevel * 10;
+          purchases.maxLeavesLevel++;
+          purchases.maxLeaves += 5;
+        } else if(i == 5 && coins >= purchases.leafSellPriceLevel * 50) {
+          coins -= purchases.leafSellPriceLevel * 50;
+          purchases.leafSellPriceLevel++;
+          purchases.leafSellPrice += 1;
+        }
       }
     }
   }
@@ -204,59 +166,9 @@ canvas.addEventListener("mousemove", () => {
     document.querySelector("*").style.cursor = "pointer";
   } else if (
     mouseX > canvas.width / 8 + canvas.width * (3 / 4) - 70 &&
-    mouseX < canvas.width / 8 + canvas.width * (3 / 4) - 70 + 50 &&
+    mouseX < (canvas.width / 8 + canvas.width * (3 / 4) - 70) + 50 &&
     mouseY > canvas.height / 8 + 20 &&
-    mouseY < canvas.height / 8 + 20 + 50 &&
-    shopOpen
-  ) {
-    document.querySelector("*").style.cursor = "pointer";
-  } else if (
-    mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-    mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-    mouseY >= canvas.height / 8 + 35 &&
-    mouseY <= canvas.height / 8 + 115 &&
-    shopOpen
-  ) {
-    document.querySelector("*").style.cursor = "pointer";
-  } else if (
-    mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-    mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-    mouseY >= canvas.height / 8 + 170 &&
-    mouseY <= canvas.height / 8 + 250 &&
-    purchases.blowPowerDivider > 1 &&
-    shopOpen
-  ) {
-    document.querySelector("*").style.cursor = "pointer";
-  } else if (
-    mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-    mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-    mouseY >= canvas.height / 8 + 305 &&
-    mouseY <= canvas.height / 8 + 385 &&
-    purchases.spawnTime > 50 &&
-    shopOpen
-  ) {
-    document.querySelector("*").style.cursor = "pointer";
-  } else if (
-    mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-    mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-    mouseY >= canvas.height / 8 + 440 &&
-    mouseY <= canvas.height / 8 + 520 &&
-    shopOpen
-  ) {
-    document.querySelector("*").style.cursor = "pointer";
-  } else if (
-    mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-    mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-    mouseY >= canvas.height / 8 + 575 &&
-    mouseY <= canvas.height / 8 + 655 &&
-    shopOpen
-  ) {
-    document.querySelector("*").style.cursor = "pointer";
-  } else if (
-    mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
-    mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
-    mouseY >= canvas.height / 8 + 710 &&
-    mouseY <= canvas.height / 8 + 790 &&
+    mouseY < (canvas.height / 8 + 20) + 50 &&
     shopOpen
   ) {
     document.querySelector("*").style.cursor = "pointer";
@@ -264,9 +176,22 @@ canvas.addEventListener("mousemove", () => {
     document.querySelector("*").style.cursor = "default";
   } else if (gameRunning) {
     document.querySelector("*").style.cursor = "none";
-  } else if (!gameRunning) {
+  }else {
     document.querySelector("*").style.cursor = "default";
   }
+
+  for (i = 0; i < 7; i++) {
+    if (
+      mouseX >= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400 &&
+      mouseX <= canvas.width / 8 + 15 + canvas.width * (3 / 4) - 100 &&
+      mouseY >= canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * i + (canvas.height * (3 / 4) + 30)/26 + 15 &&
+      mouseY <= (canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * i + (canvas.height * (3 / 4) + 30)/26 + 15) + (((canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26) - 30) &&
+      shopOpen
+    ) {
+      document.querySelector("*").style.cursor = "pointer";
+    }
+  }
+
 });
 
 let player = {
