@@ -33,6 +33,7 @@ let purchases = {
   leafSellPrice: 1,
   leafSellPriceLevel: 1,
 };
+const fps = 120;
 
 const titleImage = new Image();
 titleImage.src = "images/titleImg.png";
@@ -627,6 +628,9 @@ let heartbeat = () => {
   } else {
     drawMenu();
   }
-  requestAnimationFrame(heartbeat);
+  setTimeout(() => {
+    requestAnimationFrame(heartbeat);
+  }, 1000 / fps);
+  
 };
 heartbeat();
