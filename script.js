@@ -36,9 +36,6 @@ let purchases = {
 const fps = 120;
 const fontRatio = 20 / 1000;
 
-const titleImage = new Image();
-titleImage.src = "images/titleImg.png";
-
 const shopImage = new Image();
 shopImage.src = "images/shopIcon.png";
 
@@ -416,7 +413,6 @@ let drawMenu = () => {
   c.fillStyle = "#dad7cd";
   c.textAlign = "center";
   c.fillText("The Incredible Leaf Blower", canvas.width/2, 180);
-  // c.drawImage(titleImage, canvas.width / 2 - canvas.width / 4.5, 90, 700, 50);
   c.fillStyle = "#dad7cd";
   c.fillRect(canvas.width / 3.333, 300, canvas.width / 2.5, 200);
   c.font = "30px Arial";
