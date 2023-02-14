@@ -1,12 +1,12 @@
 let canvas = document.querySelector("canvas");
 let c = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-document.addEventListener("resize", () => {
+let resizeCanvas = () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-});
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
 let gameRunning = false;
 let deathMenu = false;
@@ -200,6 +200,8 @@ let player = {
   y: 0,
   radius: 64,
   hp: 100,
+  regen: 5,
+  regenCooldown: 500,
   draw: () => {
     c.drawImage(
       playerImage,
@@ -209,6 +211,15 @@ let player = {
       player.radius * 2
     );
   },
+  heal: () => {
+    player.regenCooldown--;
+    if(player.regenCooldown <= 0) {
+      if(player.hp + player.regen <= 100) {
+        player.hp += player.regen;
+      }
+      player.regenCooldown = 500;
+    }
+  }
 };
 
 class Leaf {
@@ -357,10 +368,22 @@ let spawn = (numOfLeaves, numOfEnemies) => {
   }
   if (enemySpawnTimer >= 300) {
     for (i = 0; i < numOfEnemies; i++) {
+      let enemyX = Math.random() * (canvas.width - 20);
+      let enemyY = Math.random() * (canvas.height - 20);
+      let distX = Math.abs(player.x - enemyX);
+      let distY = Math.abs(player.y - enemyY);
+      let dist = Math.sqrt(distX * distX + distY * distY);
+      while(dist < 250) {
+        enemyX = Math.random() * (canvas.width - 20);
+        enemyY = Math.random() * (canvas.height - 20);
+        distX = Math.abs(player.x - enemyX);
+        distY = Math.abs(player.y - enemyY);
+        dist = Math.sqrt(distX * distX + distY * distY);
+      }
       enemyArr.push(
         new Enemy(
-          Math.random() * (canvas.width - 20),
-          Math.random() * (canvas.height - 20)
+          enemyX,
+          enemyY
         )
       );
     }
@@ -611,18 +634,25 @@ let heartbeat = () => {
   if (gameRunning) {
     drawBackground();
     leafArr.forEach((leaf) => {
-      !shopOpen ? leaf.update() : null;
-      !shopOpen ? leaf.blow() : null;
+      if(!shopOpen) {
+        leaf.update();
+        leaf.blow();
+      }
       leaf.draw();
     });
     enemyArr.forEach((enemy) => {
-      !shopOpen ? enemy.collision() : null;
-      !shopOpen ? enemy.move() : null;
+      if(!shopOpen) {
+        enemy.collision();
+        enemy.move();
+      }
       enemy.draw();
     });
-    !shopOpen ? player.draw() : null;
+    if(!shopOpen) {
+      player.draw();
+      player.heal();
+      spawn(purchases.spawnAmount, coins < 100 ? 2 : coins < 300 ? 3 : coins < 800 ? 4 : coins < 3000 ? 5 : 7)
+    }
     drawScore();
-    !shopOpen ? spawn(purchases.spawnAmount, coins < 100 ? 2 : coins < 300 ? 3 : coins < 800 ? 4 : coins < 3000 ? 5 : 7) : null;
     playerDeath();
     drawShop();
   } else {
