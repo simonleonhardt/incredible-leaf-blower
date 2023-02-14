@@ -34,6 +34,7 @@ let purchases = {
   leafSellPriceLevel: 1,
 };
 const fps = 120;
+const fontRatio = 20 / 1000;
 
 const titleImage = new Image();
 titleImage.src = "images/titleImg.png";
@@ -394,6 +395,7 @@ let spawn = (numOfLeaves, numOfEnemies) => {
 let drawScore = () => {
   c.font = "30px Arial";
   c.fillStyle = "white";
+  c.textAlign = "left";
   c.fillText("Health: " + player.hp, 10, 30);
   c.fillText("Coins: " + coins, 10, 60);
 };
@@ -408,26 +410,31 @@ let drawBackground = () => {
 };
 
 let drawMenu = () => {
-  c.fillStyle = "grey";
+  c.fillStyle = "#3a5a40";
   c.fillRect(0, 0, canvas.width, canvas.height);
-  c.drawImage(titleImage, canvas.width / 2 - canvas.width / 4.5, 90, 700, 50);
-  c.fillStyle = "rgb(228, 212, 228)";
+  c.font = "40px Arial";
+  c.fillStyle = "#dad7cd";
+  c.textAlign = "center";
+  c.fillText("The Incredible Leaf Blower", canvas.width/2, 180);
+  // c.drawImage(titleImage, canvas.width / 2 - canvas.width / 4.5, 90, 700, 50);
+  c.fillStyle = "#dad7cd";
   c.fillRect(canvas.width / 3.333, 300, canvas.width / 2.5, 200);
   c.font = "30px Arial";
   c.fillStyle = "rgb(43, 40, 38)";
-  c.fillText("PLAY", canvas.width / 2 - 30, 400);
+  c.fillText("PLAY", canvas.width / 2, 400);
   c.font = "25px Arial";
-  c.fillStyle = "rgb(43, 40, 38)";
-  c.fillText("Use the mouse to control your character, blow leaves off of the screen for points, and stay away from the trees.", canvas.width/8.5, 600);
-  c.fillText("Being hit by a tree will make you lose health, but if you blow enough leaves into the trees they will die.", canvas.width/7, 630);
-  c.fillText("The coins you earn from blowing leaves can be spent in the shop for upgrades.", canvas.width/4.5, 660);
+  c.fillStyle = "#dad7cd";
+  c.textAlign = "center";
+  c.fillText("Use the mouse to control your character, blow leaves off of the screen for points, and stay away from the trees.", canvas.width/2, 600);
+  c.fillText("Being hit by a tree will make you lose health, but if you blow enough leaves into the trees they will die.", canvas.width/2, 630);
+  c.fillText("The coins you earn from blowing leaves can be spent in the shop for upgrades.", canvas.width/2, 660);
   if (deathMenu) {
     c.font = "30px Arial";
-    c.fillStyle = "salmon";
+    c.fillStyle = "#f5cac3";
     c.fillText(
       "You died! Your final score was: " + score,
-      canvas.width / 2 - canvas.width / 7,
-      200
+      canvas.width / 2,
+      230
     );
   }
 };
@@ -473,81 +480,25 @@ let drawShop = () => {
       canvas.height * (3 / 4) + (canvas.height * (3 / 4) + 30)/13
     );
     c.fillStyle = "#d8e2dc";
-    c.fillRect(
-      canvas.width / 8 + 15,
-      canvas.height / 8 + (canvas.height * (3 / 4) + 30)/26,
-      canvas.width * (3 / 4) - 30,
-      (canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26
-    );
-    c.fillRect(
-      canvas.width / 8 + 15,
-      canvas.height / 8 + (canvas.height * (3 / 4) + 30)/6 + (canvas.height * (3 / 4) + 30)/26,
-      canvas.width * (3 / 4) - 30,
-      (canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26
-    );
-    c.fillRect(
-      canvas.width / 8 + 15,
-      canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * 2 + (canvas.height * (3 / 4) + 30)/26,
-      canvas.width * (3 / 4) - 30,
-      (canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26
-    );
-    c.fillRect(
-      canvas.width / 8 + 15,
-      canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * 3 + (canvas.height * (3 / 4) + 30)/26,
-      canvas.width * (3 / 4) - 30,
-      (canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26
-    );
-    c.fillRect(
-      canvas.width / 8 + 15,
-      canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * 4 + (canvas.height * (3 / 4) + 30)/26,
-      canvas.width * (3 / 4) - 30,
-      (canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26
-    );
-    c.fillRect(
-      canvas.width / 8 + 15,
-      canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * 5 + (canvas.height * (3 / 4) + 30)/26,
-      canvas.width * (3 / 4) - 30,
-      (canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26
-    );
+    for (i = 0; i < 6; i++) {
+      c.fillRect(
+        canvas.width / 8 + 15,
+        canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * i + (canvas.height * (3 / 4) + 30)/26,
+        canvas.width * (3 / 4) - 30,
+        (canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26
+      );
+    }
     c.fillStyle = "#e9c46a";
-    c.fillRect(
-      canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400,
-      canvas.height / 8 + (canvas.height * (3 / 4) + 30)/26 + 15,
-      300,
-      ((canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26) - 30
-    );
-    c.fillRect(
-      canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400,
-      canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) + (canvas.height * (3 / 4) + 30)/26 + 15,
-      300,
-      ((canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26) - 30
-    );
-    c.fillRect(
-      canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400,
-      canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * 2 + (canvas.height * (3 / 4) + 30)/26 + 15,
-      300,
-      ((canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26) - 30
-    );
-    c.fillRect(
-      canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400,
-      canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * 3 + (canvas.height * (3 / 4) + 30)/26 + 15,
-      300,
-      ((canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26) - 30
-    );
-    c.fillRect(
-      canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400,
-      canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * 4 + (canvas.height * (3 / 4) + 30)/26 + 15,
-      300,
-      ((canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26) - 30
-    );
-    c.fillRect(
-      canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400,
-      canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * 5 + (canvas.height * (3 / 4) + 30)/26 + 15,
-      300,
-      ((canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26) - 30
-    );
+    for (i = 0; i < 6; i++) {
+      c.fillRect(
+        canvas.width / 8 + 15 + canvas.width * (3 / 4) - 400,
+        canvas.height / 8 + ((canvas.height * (3 / 4) + 30)/6) * i + (canvas.height * (3 / 4) + 30)/26 + 15,
+        300,
+        ((canvas.height * (3 / 4) + 30)/6 - (canvas.height * (3 / 4) + 30)/26) - 30
+      );
+    }
     c.fillStyle = "black";
-    c.font = "2vw Arial";
+    c.font = ((canvas.width * fontRatio)|0) + "px Arial";
     c.fillText(
       "Farther Reach       Blow Radius: " + purchases.blowRadius,
       canvas.width / 8 + 30,
